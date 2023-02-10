@@ -19,8 +19,7 @@ class MainActivity : AppCompatActivity() {
         val quoteDao = QuoteDatabase.getDatabaseInstance(applicationContext).getQuoteDAO()
         val quoteRepository = QuoteRepository(quoteDao)
 
-        mViewModel =
-            ViewModelProvider(this,MainViewModelFactory(quoteRepository)).get(MainViewModel::class.java)
+        mViewModel = ViewModelProvider(this, MainViewModelFactory(quoteRepository)).get(MainViewModel::class.java)
 
         mViewModel.getQuotes().observe(this, Observer {
             mBinding.txvMainActivity.text = it.toString()
@@ -28,11 +27,7 @@ class MainActivity : AppCompatActivity() {
 
 
         mBinding.btnMainActivity.setOnClickListener {
-            val quote = Quote(
-                101,
-                "The quick brown fox jumps over the little lazy dog.",
-                "Neeraj Manchanda"
-            )
+            val quote = Quote(101,"The quick brown fox jumps over the little lazy dog.","Neeraj Manchanda")
             mViewModel.insertQuote(quote)
 
         }
